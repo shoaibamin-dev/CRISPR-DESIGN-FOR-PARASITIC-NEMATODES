@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="UTF-8"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>CRISPR-PN</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:description" content="CRISPR, CRISPR-Cas"/>
+	<link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+	<!-- Theme Style -->
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<header id="fh5co-header" role="banner">
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<!-- Mobile Toggle Menu Button -->
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle visible-xs-block" data-toggle="collapse" data-target="#fh5co-navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+					<a class="navbar-brand" href="index.html">CRISPR-PN</a>
+				</div>
+				<div id="fh5co-navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="index.html"><span>Home <span class="border"></span></span></a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<aside class="fh5co-page-heading">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="fh5co-page-heading-lead">
+					About CRISPR-PN
+					<span class="fh5co-border"></span>
+					</h1>
+					
+				</div>
+			</div>
+		</div>
+	</aside>
+	<div id="fh5co-main">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+				<p class="serif"><font size="5" color="#98AFC7">CRISPR-PN is designed to facilitate CRISPR/Cas9 lesion experiments in parasitic nematodes<br><br>To add a nematode genome or if you have questions about CRISPR-PN, feel free to reach out by clicking the contact button at the bottom of this page<br><br>CRISPR-PN returns a list of sgRNA targets as well as the starting and ending position of each sgRNA target and the strand that it is transcribed from i.e. "+" or "-"; based on this <a href='https://www.nature.com/articles/srep28566'>paper</a> 20nt is the optimal length for the sgRNA:<br><img src="img/result.png" style="width:80%;" align="middle"><br><br>CRISPR-PN returns the sgRNA target GC% (i.e. the protospacer not the PAM) which should be 40-60% to maximize efficiency based on this <a href='https://www.ncbi.nlm.nih.gov/pubmed/26813419'>paper</a><br><img src="img/gc.png" style="width:80%;" align="middle"><br><br>CRISPR-PN calculates the CRISPRater score. The CRISPRater algorithm is described <a href="https://academic.oup.com/nar/article/46/3/1375/4754467">in this paper</a>. This score describes the efficacy of sgRNA such that a LOW efficacy score is <0.56, a MEDIUM efficacy score is 0.56<=score<=0.74, and a HIGH efficacy score is >0.74:<br><img src="img/crisprater.png" style="width:80%;" align="middle"><br><br>CRISPR-PN also returns GC% of the 6 bases immediately upstream of PAM i.e. the PAM Proximal Nucleotides (PAMPNs: green nucleotides in image below).<a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=25437567">This paper</a> shows high GC% (>50%) in PAMPNs increase efficiency:<br><img src="img/pam.jpg" style="width:65%;" align="middle"><br><img src="img/gc6.png" style="width:80%;" align="middle"><br><br>CRISPR-PN also returns a PAMPN score (max = 1, min = 0). The score is a weighted value from the four nucleotides proximal to the PAM sequence which has been shown <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=26063738">here</a> and <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=26167643">here</a> that the nucleotide position immediately adjacent to the PAM should be a "G" and not a "T" and the next three proximal nucleotides should not contain "T" in order to maximize efficiency:<br><img src="img/PAM3.jpg" style="width:60%;" align="middle"><br><img src="img/pampn.png" style="width:80%;" align="middle"><br><br>CRISPR-PN uses<a href="https://www.ncbi.nlm.nih.gov/pubmed/19261174"> Bowtie ver. 0.12.7</a> to identify off-target hits, ideally with 0 mismatches in the seed region based on <a href="https://www.ncbi.nlm.nih.gov/pubmed/23287718"> this paper</a> and no more than 3 mismatches in the protospacer based on <a href="https://www.ncbi.nlm.nih.gov/pubmed/23873081"> this paper</a>: <br><img src="img/off.png" style="width:80%;" align="middle"><br><br>CRISPR-PN employs <a href="https://www.ncbi.nlm.nih.gov/pubmed/22730293"> Primer3</a> to return sequencing primers that flank the putative lesion site: <br><img src="img/primers.png" style="width:80%;" align="middle"><br><br>Finally, CRISPR-PN results include a graphical visualization of the user input sequence and sgRNA target regions rendered using <a href="http://calipho-sib.github.io/feature-viewer/examples/"> Feature Viewer</a>:<br><img src="img/map.png" style="width:80%;" align="middle"><br><br></div>
+			</div>
+	<div class="fh5co-spacer fh5co-spacer-lg"></div>
+	<footer id="fh5co-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-sm-6">
+					<div class="fh5co-footer-widget">
+						<ul>
+							<li>
+								<a href="mailto:damienohATgwuDOTedu" onclick="this.href=this.href
+									.replace(/AT/,'&#64;')
+								.replace(/DOT/,'&#46;')">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- jQuery -->
+		<script src="js/jquery.min.js"></script>
+		<!-- jQuery Easing -->
+		<script src="js/jquery.easing.1.3.js"></script>
+		<!-- Bootstrap -->
+		<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>

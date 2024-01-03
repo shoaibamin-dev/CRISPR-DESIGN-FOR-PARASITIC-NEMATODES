@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--[if lt IE 7]>      
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+   <![endif]-->
+<!--[if IE 7]>         
+   <html class="no-js lt-ie9 lt-ie8">
+      <![endif]-->
+<!--[if IE 8]>         
+      <html class="no-js lt-ie9">
+         <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="CRISPR-Cas">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>CRISPR-PN</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+	<!-- Intro Style -->
+	<link rel="stylesheet" type="text/css" href="css/introjs.css">
+	<!-- Theme Style -->
+	<link rel="stylesheet" href="css/style.css">
+	</head>
+
+<body>
+	<header id="fh5co-header">
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<!-- Mobile Toggle Menu Button --><a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle visible-xs-block" data-toggle="collapse" data-target="#fh5co-navbar" aria-expanded="false" aria-controls="navbar"><i></i></a> <a class="navbar-brand" href="index.html">CRISPR-PN</a> </div>
+				<div id="fh5co-navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="about.html"><span>About <span class="border"></span></span></a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<aside class="fh5co-page-heading">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="fh5co-page-heading-lead">
+                              CRISPR design for parasitic nematodes
+                              <span class="fh5co-border"></span>
+                           </h1>
+					<br>
+					<div align="left">
+						<h3>Latest Version Updates</h3>
+						<B>1.0.9</B> Added Graphic of sgRNA targets
+						<br>
+						<B>1.0.8</B> Added Preloader
+						<br>
+						<B>1.0.7</B> Integrated Primer3 output into results table
+						<br>
+						<B>1.0.6</B> CRISPRater score column added to results
+						<br>
+						<B>1.0.5</B> PAMPN score column added to results
+						<br>
+						<B>1.0.4</B> Results column added with PAMPN GC%
+						<br>
+						<B>1.0.3</B> Added file-lock structure to balance job queue
+						<br>
+						<B>1.0.2</B> New Method now available to search for off-targets
+						<br>
+						<B>1.0.1</B> New interface for design parameters
+						<br>
+						<B>1.0.0</B> Published at <em>Mol. & Biochem. Parasitology</em> </div>
+				</div>
+			</div>
+		</div>
+	</aside>
+	<div id="fh5co-main">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12"> </div>
+			</div> <span id="tab_space">
+                        <FORM name="myForm" action="loading.php" method="get" onsubmit="return validQuery()">
+                           <br>
+                           <br>
+                           <br>
+                           <p class="serif"><font size="6" color="#98AFC7">Enter target DNA Sequence:</font></p>
+                           <TABLE>
+                              <TR>
+                                 <TD>
+                                    <textarea input type="text" id="query_in" name="sequence" ROWS="10" COLS=120 WRAP data-step="1" data-intro="Enter raw DNA sequence into text area" minlength="100" required>GCAGATGAGGTTAGCATATCTACTTGGCCTCATAACTCTTATCTCTGCTCGAAGGCATCCATCACTTCCTCCCTACCTCTTCGGGAGGCCCACTTCGGGTGGATTTACTAATCACGGCTTGTACCTTCAAGATGCTTCATTAGGATCTATACAAGGTCCTAACATCAGTATACACCTTTTTAACCAGAAGATTGATCACTTTAGTTCTAGTAATGAGACTTTTGAACAGCGCTACTGGCACAACTTGAACTACTCTAAAGATAAGAATATCATATTCTTACTTATTCAAGGGGAATCAGTTGCCACAGACGTCTGGGTGAAGAATCCTAATATCACCTATCTCAAACTTGCACAGAAGTTTGGAGCACACGTCTTTCAGCTGGAGCATAGATGCTTCGGATTCAGTCGACCGTATCCTGATCTCTCATTTCCTCACCTTTCAACGTGTACCGTTGACCAGGCACTGGAGGACATTCATACTTTCATCCAAGCCAAGAATGCATATTTTAAGTATTCTAATCCTAAGTGGATAATATTCGGAGGGTCATATCCGGGTTCACTTGCCGCCCTCTTCCGTATGAAGTATCCAAATGACACTAAAGGTGCTATCGCTAGCAGCGCACCAATGCTTTGGACACTAGACTTCTTTCAATATGCTCAAGTGATGAACGATGTTTTGGAAGAAACAGATCCTAACTGCAAAAGGGCAGTCGAGGACGCATTTACAACTATGCAGGAACTGAGTTTGACAAACAATGGAAGGGACCTACTCAATTACTACTTTAATCTCAAGCCACCGTTCGTAGCCAATCGGACCACTCAGCATGATGTCGACAACTTCTTTGCAAATGTTTTTACTTTCTTTCAAGAAGTAATTCAATATAGTTACAATGGAATGAATAACGCGACAAGAGCAGGGCTTGGAGTCCTAAAACTGTGTGAACATATGACAGACAGTCATAGATATCCTGATGTCGTTGTTAGAGTC</textarea>
+                                 </TD>
+                              </TR>
+                           </TABLE>
+                           <BR>
+                           <fieldset class="col-md-8">
+                           <B>Parasitic nematode:</B>
+                           <select name="blast" data-step="2" data-intro="Select nematode species to interrograte">
+                              <option value="bact">Heterorhabditis bacteriophora WS236</option>
+                              <option value="stein">Steinernema carpocapsae PRJNA202318.WBPS11</option>
+                              <option value="ster">Strongyloides stercoralis PRJEB528</option>
+                              <option value="ratti">Strongyloides ratti PRJEA62033.WS237</option>
+                              <option value="nippo">Nippostrongylus brasiliensis PRJEB511.WBPS11</option>
+                              <option value="muris">Trichuris muris PRJEB126.WS264</option>
+                              <option value="necator">Necator americanus PRJNA72135.WS242</option>
+                              <option value="ceyl">Ancylostoma ceylanicum PRJNA231479.WS248</option>
+                              <option value="can">Ancylostoma caninum PRJNA72585.WBPS11</option>
+                              <option value="pacif">Pristionchus pacificus PRJNA12644.WS260</option>
+                              <option value="malayi">Brugia malayi PRJNA10729.WS260</option>
+                              <option value="loa">Loa loa PRJNA60051.WS237</option>
+                              <option value="contortus">Haemonchus contortus PRJEB506.WS248</option>
+                              <option value="incog">Meloidogyne incognita PRJEA28837.WS248</option>
+                           </select>
+                           <div class="row">
+                              <div class="col-md-4">
+                                 <B>gRNA length:</B>
+                                 <select name='sgrna' id="sgrna" data-step="3" data-intro="Select the gRNA length; 20nt is ideal based on this <a href='https://www.nature.com/articles/srep28566'>paper</a>">
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20" selected>20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                 </select>
+                              </div>
+                              <div class="col-md-4">
+                                 <B>Upper GC%:</B>
+                                 <select name='upper' id="upper" data-step="4" data-intro="Set the upper and lower GC% for gRNA target; should be 40-60% to maximize efficiency based on this <a href='https://www.ncbi.nlm.nih.gov/pubmed/26813419'>paper</a>">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                    <option value="60" selected>60</option>
+                                    <option value="61">61</option>
+                                    <option value="62">62</option>
+                                    <option value="63">63</option>
+                                    <option value="64">64</option>
+                                    <option value="65">65</option>
+                                    <option value="66">66</option>
+                                    <option value="67">67</option>
+                                    <option value="68">68</option>
+                                    <option value="69">69</option>
+                                    <option value="70">70</option>
+                                    <option value="71">71</option>
+                                    <option value="72">72</option>
+                                    <option value="73">73</option>
+                                    <option value="74">74</option>
+                                    <option value="75">75</option>
+                                    <option value="76">76</option>
+                                    <option value="77">77</option>
+                                    <option value="78">78</option>
+                                    <option value="79">79</option>
+                                    <option value="80">80</option>
+                                    <option value="81">81</option>
+                                    <option value="82">82</option>
+                                    <option value="83">83</option>
+                                    <option value="84">84</option>
+                                    <option value="85">85</option>
+                                    <option value="86">86</option>
+                                    <option value="87">87</option>
+                                    <option value="88">88</option>
+                                    <option value="89">89</option>
+                                    <option value="90">90</option>
+                                    <option value="91">91</option>
+                                    <option value="92">92</option>
+                                    <option value="93">93</option>
+                                    <option value="94">94</option>
+                                    <option value="95">95</option>
+                                    <option value="96">96</option>
+                                    <option value="97">97</option>
+                                    <option value="98">98</option>
+                                    <option value="99">99</option>
+                                    <option value="100">100</option>
+                                 </select>
+                              </div>
+                              <div class="col-md-4">
+                                 <B>Lower GC%:</B>
+                                 <select name='lower' id="lower">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40" selected>40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                    <option value="60">60</option>
+                                    <option value="61">61</option>
+                                    <option value="62">62</option>
+                                    <option value="63">63</option>
+                                    <option value="64">64</option>
+                                    <option value="65">65</option>
+                                    <option value="66">66</option>
+                                    <option value="67">67</option>
+                                    <option value="68">68</option>
+                                    <option value="69">69</option>
+                                    <option value="70">70</option>
+                                    <option value="71">71</option>
+                                    <option value="72">72</option>
+                                    <option value="73">73</option>
+                                    <option value="74">74</option>
+                                    <option value="75">75</option>
+                                    <option value="76">76</option>
+                                    <option value="77">77</option>
+                                    <option value="78">78</option>
+                                    <option value="79">79</option>
+                                    <option value="80">80</option>
+                                    <option value="81">81</option>
+                                    <option value="82">82</option>
+                                    <option value="83">83</option>
+                                    <option value="84">84</option>
+                                    <option value="85">85</option>
+                                    <option value="86">86</option>
+                                    <option value="87">87</option>
+                                    <option value="88">88</option>
+                                    <option value="89">89</option>
+                                    <option value="90">90</option>
+                                    <option value="91">91</option>
+                                    <option value="92">92</option>
+                                    <option value="93">93</option>
+                                    <option value="94">94</option>
+                                    <option value="95">95</option>
+                                    <option value="96">96</option>
+                                    <option value="97">97</option>
+                                    <option value="98">98</option>
+                                    <option value="99">99</option>
+                                    <option value="100">100</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <B>PAM sequence:</B>
+                           <input type="text" name='pam_seq' id="pam_seq" VALUE="NGG" required data-step="5" data-intro="Enter the preferred PAM sequence. Standard ambiguity codes can be used e.g. 'N' for any base">
+                           <br><br>
+                           <fieldset class="col-md-12">
+                              <legend>&nbsp;&nbsp;Parameters:</legend>
+                              <B>Seed length:</B>
+                              <select name='slen' id="slen" data-step="6" data-intro="Set the minimum contiguous perfect match size">
+                                 <option value="5">5</option>
+                                 <option value="6">6</option>
+                                 <option value="7">7</option>
+                                 <option value="8">8</option>
+                                 <option value="9">9</option>
+                                 <option value="10">10</option>
+                                 <option value="11">11</option>
+                                 <option value="12" selected>12</option>
+                                 <option value="13">13</option>
+                                 <option value="14">14</option>
+                                 <option value="15">15</option>
+                                 <option value="16">16</option>
+                                 <option value="17">17</option>
+                                 <option value="18">18</option>
+                                 <option value="19">19</option>
+                                 <option value="20">20</option>
+                              </select>
+                              <B>Seed mismatches:</B>
+                              <select name='mis' id="mis" data-step="7" data-intro="Select number of mismatches permitted in seed">
+                                 <option value="0" selected>0</option>
+                                 <option value="1">1</option>
+                                 <option value="2">2</option>
+                                 <option value="3">3</option>
+                              </select>
+                              <B>Total mismatches:</B>
+                              <select name='tmis' id="tmis" data-step="8" data-intro="Select total number of mismatches permitted i.e. seed and non-need alignment">
+                                 <option value="0">0</option>
+                                 <option value="1">1</option>
+                                 <option value="2">2</option>
+                                 <option value="3" selected>3</option>
+                                 <option value="4">4</option>
+                              </select>
+                           </fieldset>
+                           <br><br><br><br>
+                           <input class="btn btn-warning btn-lg" type="submit" data-step="9" data-intro="After setting the parameters, click this button to get results"/>
+                           <input class="btn btn-danger btn-lg" type="reset" value="Reset" onClick="window.location.reload()" data-step="10" data-intro="Reset all the parameters to default values">
+                           <div class="step">
+                              <input class="btn btn-info btn-lg" value="HELP" onclick="javascript:introJs().start()">
+                           </div>
+                  </div>
+               </div>
+               <script>
+                  function validQuery() {
+                    	var inField = document.getElementById('query_in').value;
+                     	if (inField == "") {
+                     	alert("No target sequence provided!");
+                                                                 return false;
+                                                             } else {
+                                                                 return true;
+                                                             }  
+                                                         }
+               </script>
+               <div class="fh5co-spacer fh5co-spacer-lg"></div>
+               <footer id="fh5co-footer">
+                  <div class="container">
+                     <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                           <div class="fh5co-footer-widget">
+                              <ul>
+                                 <li>
+                                    <a href="https://www.sciencedirect.com/science/article/pii/S0166685118301725">Reference: O'Halloran, Mol. Biochem. Parasitol.</a>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </footer>
+               <!-- jQuery -->
+               <script src="js/jquery.min.js"></script>
+               <!-- jQuery Easing -->
+               <script src="js/jquery.easing.1.3.js"></script>
+               <!-- Bootstrap -->
+               <script src="js/bootstrap.min.js"></script>
+               <!-- Help JS -->
+               <script type="text/javascript" src="js/intro.js"></script>
+               <!-- FOR IE9 below -->
+               <!--[if lt IE 9]>
+               <script src="js/respond.min.js"></script>
+               <![endif]-->
+            </body>
+         </html>
